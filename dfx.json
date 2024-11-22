@@ -1,0 +1,27 @@
+{
+  "canisters": {
+    "VoltEdge_backend": {
+      "candid": "src/VoltEdge_backend/VoltEdge_backend.did",
+      "package": "VoltEdge_backend",
+      "type": "rust"
+    },
+    "VoltEdge_frontend": {
+      "dependencies": [
+        "VoltEdge_backend"
+      ],
+      "source": [
+        "src/VoltEdge_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "VoltEdge_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

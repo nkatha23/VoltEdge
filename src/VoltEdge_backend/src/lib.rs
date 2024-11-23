@@ -1,10 +1,14 @@
-use candid::{CandidType, Deserialize};
+use candid::{CandidType,candid_method, Deserialize};
 use ic_cdk_macros::{init, query, update};
 use ic_cdk::caller;
 use std::collections::HashMap;
 use std::sync::Mutex;
 //use lazy_static::lazy_static;
 use serde::Serialize; //( backend initialization)
+use ic_types::{Principal};
+
+
+const ANONYMOUS_SUFFIX: u8 = 4;
 
 // ====== Data Models ======
 #[derive(CandidType, Serialize, Deserialize, Clone, Debug)]
@@ -25,10 +29,52 @@ thread_local! {
     static ENERGY_RECOMMENDATIONS: Mutex<HashMap<String, Vec<EnergyRecommendation>>> = Mutex::new(HashMap::new());
 }
 
+fn is_authorized_user() -> Result<(), String> {
+    let principal = &caller();
+    let bytes = principal.as_ref();
+
+    match bytes.len() {
+        1 if bytes[0] == ANONYMOUS_SUFFIX => {
+            Err("Anonymous principal not allowed".to_string())
+        },
+        _ => Ok(()),
+    }
+}
+
 // ====== Initialization ======
 #[init]
 fn init() {
     ic_cdk::println!("Initialization completed!");
+}
+
+
+#[query]
+fn echo(text: String) -> String {
+    text
+}
+
+#[query]
+fn get_principal() -> Principal {
+    caller()
+}
+
+#[query]
+fn get_canister_principal() -> Principal {
+    ic_cdk::api::id()
+}
+
+#[query]
+#[candid_method(query)]
+fn http_request(request: HttpRequest) -> HttpResponse {
+    HttpResponse {
+        status_code: 200,
+        headers: vec![
+            HeaderField("Content-Length".to_string(), format!("{}", 0)),
+            HeaderField("Content-Disposition".to_string(), "inline".to_string()),
+            HeaderField("Content-Type".to_string(), "text/html".to_string()),
+        ],
+        body: vec![],
+    }
 }
 
 // ====== Update Functions ======
@@ -111,4 +157,3 @@ fn get_recommendations() -> Vec<EnergyRecommendation> {
             .unwrap_or_else(Vec::new)
     })
 }
-

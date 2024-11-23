@@ -1,31 +1,23 @@
-import { useState } from 'react';
-import { VoltEdge_backend } from 'declarations/VoltEdge_backend';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/navbar/Navbar'; // Import the Navbar component
+import Home from './components/home/Home'; // Create this component
+import Dashboard from './components/dashboard/Dashboard'; // Create this component
+import Login from './components/login/Login'; // Create this component
+import Auth from './components/auth/auth'; // Create this component
 
-function App() {
-  const [greeting, setGreeting] = useState('');
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    VoltEdge_backend.greet(name).then((greeting) => {
-      setGreeting(greeting);
-    });
-    return false;
-  }
-
+const App = () => {
   return (
-    <main>
-      <img src="/logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting">{greeting}</section>
-    </main>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

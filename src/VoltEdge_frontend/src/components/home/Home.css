@@ -1,0 +1,263 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #fff;
+}
+
+/* Hero Section */
+.hero {
+  background: #6c63ff;
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.hero .card {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hero h3 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.hero-actions {
+  margin-top: 30px;
+}
+
+.btn-secondary, .btn-primary {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-secondary {
+  background-color: #6c63ff;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #ff6347;
+  color: white;
+}
+
+.btn-link {
+  color: #6c63ff;
+  text-decoration: none;
+}
+
+
+
+/* Responsive Design (optional) */
+@media (max-width: 768px) {
+  .benefits {
+    grid-template-columns: 1fr; /* One column on smaller screens */
+  }
+}
+
+/* Benefits Section */
+#benefits {
+  margin: 0 20px;  /* Add left and right margins */
+  padding: 0 20px; /* Optional padding for more space on the sides */
+  margin-bottom: 40px; /* Add bottom margin for spacing */
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* Apply max-width to the benefits section for larger screens */
+.benefits1 {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.benefit-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+}
+
+.benefit-card h4 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.benefit-card p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.benefit-card strong {
+  font-weight: bold;
+}
+
+.benefits .listing {
+  margin-bottom: 20px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  #benefits {
+    margin: 0 10px; /* Reduce margin on mobile */
+    margin-bottom: 30px; /* Bottom margin for mobile */
+  }
+
+  .benefits {
+    grid-template-columns: 1fr; /* Switch to single column layout for smaller screens */
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  #benefits {
+    margin: 0 10px; /* Reduce margin on mobile */
+  }
+
+  .benefits {
+    grid-template-columns: 1fr; /* Switch to single column layout for smaller screens */
+  }
+}
+
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .benefits {
+    grid-template-columns: 1fr; /* Switch to single column layout for smaller screens */
+  }
+}
+
+
+/* Remove bullets from lists */
+ul, ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .benefits {
+    grid-template-columns: 1fr; /* Switch to a single column on smaller screens */
+  }
+}
+
+.cta {
+  background-color: #6C63FF;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* Footer */
+.footer {
+  background-color: #222;
+  color: #ccc;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.footer p {
+  font-size: 14px;
+}
+
+.footer-links {
+  margin-top: 20px;
+}
+
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero h3 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .benefits1 h2, .benefits1 h3 {
+    font-size: 24px;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .cta h2 {
+    font-size: 30px;
+  }
+
+  .cta p {
+    font-size: 16px;
+  }
+}
+
+/* Dark Mode Styles */
+.dark-mode .footer {
+  background-color: #121212;
+}
+
+.dark-mode .footer-links a {
+  color: #bbb;
+}
+
+.dark-mode .footer-links a:hover {
+  color: #fff;
+}
+

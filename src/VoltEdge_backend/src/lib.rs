@@ -4,7 +4,7 @@ use ic_cdk::caller;
 use std::collections::HashMap;
 use std::sync::Mutex;
 //use lazy_static::lazy_static;
-use serde::Serialize;
+use serde::Serialize; //( backend initialization)
 use ic_types::{Principal};
 
 

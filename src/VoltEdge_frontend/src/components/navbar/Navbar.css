@@ -62,7 +62,8 @@
   font-family: 'Arial', sans-serif;
 }
 
+/* Brighter color on hover */
 .navbar-link:hover {
-  text-decoration: underline;
-  color: #F3D225; /* Hover color */
+  text-decoration: none; /* Remove underline */
+  color: #FFD700; /* Brighter yellow (gold) color for hover */
 }

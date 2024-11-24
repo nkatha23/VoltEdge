@@ -37,6 +37,7 @@ body {
 .hero p {
   font-size: 18px;
   margin: 20px 0;
+  color: #f4f4f9;
 }
 
 .hero-actions {
@@ -69,20 +70,40 @@ body {
   text-decoration: none;
 }
 
+/* Hero Image Section */
+#hero-image {
+  background-image: url('./../../assets/renewable2.jpg'); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  position: relative;
+  text-align: center;
+  color: white;
+}
 
+.hero-image-section .overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
 
-/* Responsive Design (optional) */
-@media (max-width: 768px) {
-  .benefits {
-    grid-template-columns: 1fr; /* One column on smaller screens */
-  }
+.hero-image-section .overlay h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.hero-image-section .overlay p {
+  font-size: 18px;
 }
 
 /* Benefits Section */
 #benefits {
-  margin: 0 20px;  /* Add left and right margins */
-  padding: 0 20px; /* Optional padding for more space on the sides */
-  margin-bottom: 40px; /* Add bottom margin for spacing */
+  margin: 0 20px;
+  padding: 0 20px;
+  margin-bottom: 40px;
 }
 
 .benefits {
@@ -90,12 +111,6 @@ body {
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   margin-top: 40px;
-}
-
-/* Apply max-width to the benefits section for larger screens */
-.benefits1 {
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .benefit-card {
@@ -123,60 +138,7 @@ body {
   line-height: 1.6;
 }
 
-.benefit-card strong {
-  font-weight: bold;
-}
-
-.benefits .listing {
-  margin-bottom: 20px;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  #benefits {
-    margin: 0 10px; /* Reduce margin on mobile */
-    margin-bottom: 30px; /* Bottom margin for mobile */
-  }
-
-  .benefits {
-    grid-template-columns: 1fr; /* Switch to single column layout for smaller screens */
-  }
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  #benefits {
-    margin: 0 10px; /* Reduce margin on mobile */
-  }
-
-  .benefits {
-    grid-template-columns: 1fr; /* Switch to single column layout for smaller screens */
-  }
-}
-
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .benefits {
-    grid-template-columns: 1fr; /* Switch to single column layout for smaller screens */
-  }
-}
-
-
-/* Remove bullets from lists */
-ul, ol {
-  list-style-type: none;
-  padding-left: 0;
-  margin-left: 0;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .benefits {
-    grid-template-columns: 1fr; /* Switch to a single column on smaller screens */
-  }
-}
-
+/* Call to Action */
 .cta {
   background-color: #6C63FF;
   color: white;
@@ -192,72 +154,74 @@ ul, ol {
 .cta p {
   font-size: 18px;
   margin-bottom: 30px;
+  color: #f4f4f9;
 }
 
-/* Footer */
-.footer {
-  background-color: #222;
-  color: #ccc;
-  padding: 30px 20px;
-  text-align: center;
+/* Image and Text Section */
+#image-text-section {
+  margin: 40px 20px;
+  padding: 20px;
 }
 
-.footer p {
-  font-size: 14px;
+.image-text-item {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers the content horizontally */
+  margin-bottom: 30px;
 }
 
-.footer-links {
-  margin-top: 20px;
+.image-text-item img {
+  width: 100%;        /* Ensure images take up full width of the container */
+  max-width: 800px;   /* Limit the width of the image */
+  height: 400px;      /* Set a fixed height for uniformity */
+  object-fit: cover;  /* Ensures images are cropped to maintain aspect ratio */
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.footer-links a {
-  color: #ccc;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 14px;
+.image-text-item .text {
+  margin-left: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers text vertically */
+  text-align: center;      /* Centers text horizontally */
 }
 
-.footer-links a:hover {
-  color: #fff;
+.image-text-item .text h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
-/* Mobile Responsiveness */
+.image-text-item .text p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Reverse the order for alternating images and text */
+.image-text-item.reverse {
+  flex-direction: row-reverse;
+}
+
+.image-text-item.reverse .text {
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+/* Optional: Adjust image size for smaller screens */
 @media (max-width: 768px) {
-  .hero h3 {
-    font-size: 28px;
+  .image-text-item {
+    flex-direction: column;
   }
 
-  .hero p {
-    font-size: 16px;
+  .image-text-item .text {
+    margin-left: 0;
+    margin-top: 20px;
   }
 
-  .benefits1 h2, .benefits1 h3 {
-    font-size: 24px;
-  }
-
-  .benefits {
-    grid-template-columns: 1fr;
-  }
-
-  .cta h2 {
-    font-size: 30px;
-  }
-
-  .cta p {
-    font-size: 16px;
+  .image-text-item img {
+    max-width: 100%; /* Ensure the image is responsive */
+    height: 200px;   /* Adjust height for smaller screens */
   }
 }
-
-/* Dark Mode Styles */
-.dark-mode .footer {
-  background-color: #121212;
-}
-
-.dark-mode .footer-links a {
-  color: #bbb;
-}
-
-.dark-mode .footer-links a:hover {
-  color: #fff;
-}
-

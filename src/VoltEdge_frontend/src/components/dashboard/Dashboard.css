@@ -1,0 +1,205 @@
+/* Base styles for the Dashboard */
+.dashboard-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode */
+.dark-mode {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  color: #2196f3;
+}
+
+.btn-dark-mode {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-dark-mode:hover {
+  background-color: #1976d2;
+}
+
+/* Loading state */
+p {
+  font-size: 1.2rem;
+  color: #777;
+}
+
+/* Energy Usage Section */
+.energy-usage-section {
+  margin-top: 30px;
+}
+
+.energy-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.summary-card {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex: 1;
+}
+
+.summary-card h3 {
+  margin-bottom: 10px;
+  color: #2196f3;
+}
+
+.summary-card p {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Flexbox layout for the chart and recommendations side by side */
+.overview-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.chart-container {
+  flex: 1;
+  margin-right: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container canvas {
+  max-width: 100%;
+}
+
+/* Recommendations Section */
+.recommendations-container {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-card-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recommendations-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recommendation-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.recommendation-card:hover {
+  background-color: #f1f1f1;
+}
+
+.recommendation-card p {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Dark Mode Overrides for Recommendations */
+.dark-mode .recommendation-card-container {
+  background-color: #333;
+  color: #f1f1f1;
+}
+
+.dark-mode .recommendation-card {
+  background-color: #444;
+}
+
+.dark-mode .recommendation-card:hover {
+  background-color: #555;
+}
+
+/* Dark Mode Overrides for Energy Usage */
+.dark-mode .summary-card {
+  background-color: #333;
+  color: #f1f1f1;
+}
+
+.dark-mode .summary-card h3 {
+  color: #90caf9;
+}
+
+.dark-mode .recommendation-card {
+  background-color: #444;
+  color: #f1f1f1;
+}
+
+.dark-mode .recommendation-card:hover {
+  background-color: #555;
+}
+
+/* Style for Redeem button */
+button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+/* Redeem message */
+.redeem-message {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #4caf50;
+  font-weight: bold;
+}

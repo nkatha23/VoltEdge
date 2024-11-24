@@ -384,56 +384,279 @@
 
 // export default Dashboard;
 
-import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import { Actor, HttpAgent } from '@dfinity/agent'; 
-import { idlFactory } from './declarations/VoltEdge_backend/VoltEdge_backend'; // Import your backend IDL
 
-const canisterId = "<CANISTER_ID>";
-const agent = new HttpAgent({ host: "https://ic0.app" });
-const backendActor = Actor.createActor(idlFactory, { agent, canisterId });
+// import React, { useEffect, useState } from 'react';
+// import { Line } from 'react-chartjs-2';
+// import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+// import './Dashboard.css';  // Import the new CSS file for dashboard-specific styles
+
+// // Register necessary components for Chart.js
+// ChartJS.register(
+//   CategoryScale,
+//   LinearScale,
+//   PointElement,
+//   LineElement,
+//   Title,
+//   Tooltip,
+//   Legend
+// );
+
+// function Dashboard() {
+//   const [energyUsage, setEnergyUsage] = useState([]);
+//   const [recommendations, setRecommendations] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [darkMode, setDarkMode] = useState(false);  // Dark mode state
+//   const [tokens, setTokens] = useState(0);  // New state to store user tokens
+
+//   useEffect(() => {
+//     // Toggle dark mode based on local storage or default value
+//     const savedMode = localStorage.getItem("darkMode");
+//     if (savedMode) setDarkMode(JSON.parse(savedMode));
+//     document.body.classList.toggle("dark-mode", darkMode);
+
+//     // Simulate fetching energy usage and recommendations with dummy data
+//     fetchEnergyUsage();
+//     fetchRecommendations();
+//   }, [darkMode]);
+
+//   const fetchEnergyUsage = async () => {
+//     setLoading(true);
+//     // Simulating API response with dummy data
+//     const dummyData = [
+//       { timestamp: 1634179200000000, consumption_kwh: 5, surplus_kwh: 2 },
+//       { timestamp: 1634265600000000, consumption_kwh: 8, surplus_kwh: 1 },
+//       { timestamp: 1634352000000000, consumption_kwh: 7, surplus_kwh: 3 },
+//       { timestamp: 1634438400000000, consumption_kwh: 6, surplus_kwh: 0 },
+//       { timestamp: 1634524800000000, consumption_kwh: 9, surplus_kwh: 4 },
+//     ];
+//     setEnergyUsage(dummyData);
+//     setLoading(false);
+//     calculateTokens(dummyData);  // Calculate tokens based on energy usage and surplus
+//   };
+
+//   const fetchRecommendations = async () => {
+//     setLoading(true);
+//     // Simulating API response with dummy recommendations
+//     const dummyRecommendations = [
+//       { recommendation: 'Reduce usage during peak hours', potential_savings: 3 },
+//       { recommendation: 'Use energy-efficient appliances', potential_savings: 5 },
+//       { recommendation: 'Optimize HVAC settings', potential_savings: 2 },
+//     ];
+//     setRecommendations(dummyRecommendations);
+//     setLoading(false);
+//   };
+
+//   const formatChartData = () => {
+//     const timestamps = energyUsage.map((usage) =>
+//       new Date(usage.timestamp).toLocaleDateString()
+//     );
+//     const consumption = energyUsage.map((usage) => usage.consumption_kwh);
+
+//     return {
+//       labels: timestamps,
+//       datasets: [
+//         {
+//           label: "Energy Consumption (kWh)",
+//           data: consumption,
+//           borderColor: "rgba(75, 192, 192, 1)",
+//           backgroundColor: "rgba(75, 192, 192, 0.2)",
+//           borderWidth: 2,
+//         },
+//       ],
+//     };
+//   };
+
+//   const toggleDarkMode = () => {
+//     setDarkMode(!darkMode);
+//     localStorage.setItem("darkMode", JSON.stringify(!darkMode));
+//   };
+
+//   // Calculate summary stats for energy usage
+//   const calculateSummary = () => {
+//     if (energyUsage.length === 0) return { total: 0, average: 0 };
+//     const total = energyUsage.reduce((acc, usage) => acc + usage.consumption_kwh, 0);
+//     const average = total / energyUsage.length;
+//     return { total, average };
+//   };
+
+//   // Calculate tokens based on energy usage and surplus energy sold to the grid
+//   const calculateTokens = (energyData) => {
+//     let tokens = 0;
+//     energyData.forEach((usage) => {
+//       // Earn tokens for energy efficiency: Less consumption means more tokens
+//       if (usage.consumption_kwh <= 7) {  // Assuming consuming <= 7 kWh/day is energy-efficient
+//         tokens += 2;  // Award 2 tokens for energy-efficient behavior
+//       }
+
+//       // Earn tokens for surplus energy sold to the grid (P2P model)
+//       tokens += usage.surplus_kwh;  // Award 1 token per surplus kWh sold
+//     });
+//     setTokens(tokens);
+//   };
+
+//   const { total, average } = calculateSummary();
+
+//   return (
+//     <div className={`dashboard-container ${darkMode ? "dark-mode" : ""}`}>
+//       <div className="dashboard-header">
+//         <h1>VoltEdge Dashboard</h1>
+//         <button className="btn-dark-mode" onClick={toggleDarkMode}>
+//           Toggle Dark Mode
+//         </button>
+//       </div>
+
+//       {loading && <p>Loading...</p>}
+
+//       {/* Energy Usage Overview Section */}
+//       <div className="energy-usage-section">
+//         <h2>Energy Usage Overview</h2>
+//         <div className="energy-summary">
+//           <div className="card-column">
+//             <div className="summary-card">
+//               <h3>Total Consumption</h3>
+//               <p>{total} kWh</p>
+//             </div>
+//             <div className="summary-card">
+//               <h3>Average Daily Consumption</h3>
+//               <p>{average.toFixed(2)} kWh</p>
+//             </div>
+//           </div>
+
+//           <div className="card-column">
+//             <div className="summary-card">
+//               <h3>Tokens Earned</h3>
+//               <p>{tokens} Tokens</p>
+//             </div>
+//           </div>
+//         </div>
+//         {energyUsage.length > 0 ? (
+//           <div className="chart-container">
+//             <Line
+//               data={formatChartData()}
+//               options={{
+//                 responsive: true,
+//                 plugins: {
+//                   legend: { display: true },
+//                 },
+//               }}
+//             />
+//           </div>
+//         ) : (
+//           <p>No energy usage data available.</p>
+//         )}
+//       </div>
+
+//       {/* Recommendations Section */}
+//       {/* <div className="recommendations-section">
+//         <h2>Energy Efficiency Insights</h2>
+//         {recommendations.length > 0 ? (
+//           <ul className="recommendations-list">
+//             {recommendations.map((rec, index) => (
+//               <li key={index} className="recommendation-card">
+//                 {rec.recommendation} - Potential Savings: {rec.potential_savings} kWh
+//               </li>
+//             ))}
+//           </ul>
+//         ) : (
+//           <p>No recommendations available.</p>
+//         )}
+//       </div> */}
+//       <div className="recommendations-section">
+//   <h2>Energy Efficiency Insights</h2>
+//   {recommendations.length > 0 ? (
+//     <div className="recommendation-card-container">
+//       <ul className="recommendations-list">
+//         {recommendations.map((rec, index) => (
+//           <li key={index} className="recommendation-card">
+//             {rec.recommendation} - Potential Savings: {rec.potential_savings} kWh
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   ) : (
+//     <p>No recommendations available.</p>
+//   )}
+// </div>
+
+//     </div>
+//   );
+// }
+
+// export default Dashboard;
+
+
+import React, { useEffect, useState } from 'react';
+import { Bar } from 'react-chartjs-2'; // Import Bar chart from chartjs
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import './Dashboard.css';
+
+// Register necessary components for Chart.js
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function Dashboard() {
   const [energyUsage, setEnergyUsage] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [darkMode, setDarkMode] = useState(false); 
+  const [tokens, setTokens] = useState(0);
 
-  // Fetch energy data and recommendations
+  // Calculate summary stats for energy usage
+  const calculateSummary = () => {
+    if (energyUsage.length === 0) return { total: 0, average: 0 };
+    const total = energyUsage.reduce((acc, usage) => acc + usage.consumption_kwh, 0);
+    const average = total / energyUsage.length;
+    return { total, average };
+  };
+
   useEffect(() => {
+    // Toggle dark mode based on local storage or default value
+    const savedMode = localStorage.getItem("darkMode");
+    if (savedMode) setDarkMode(JSON.parse(savedMode));
+    document.body.classList.toggle("dark-mode", darkMode);
+
     fetchEnergyUsage();
     fetchRecommendations();
-  }, []);
+  }, [darkMode]);
 
   const fetchEnergyUsage = async () => {
     setLoading(true);
-    try {
-      const data = await backendActor.analyze_user_energy(); // Fetch data from backend
-      setEnergyUsage(data);
-    } catch (error) {
-      console.error("Error fetching energy usage:", error);
-    } finally {
-      setLoading(false);
-    }
+    const dummyData = [
+      { timestamp: 1634179200000000, consumption_kwh: 5, surplus_kwh: 2, production_kwh: 3 },
+      { timestamp: 1634265600000000, consumption_kwh: 8, surplus_kwh: 1, production_kwh: 3 },
+      { timestamp: 1634352000000000, consumption_kwh: 7, surplus_kwh: 3, production_kwh: 4 },
+      { timestamp: 1634438400000000, consumption_kwh: 6, surplus_kwh: 0, production_kwh: 6 },
+      { timestamp: 1634524800000000, consumption_kwh: 9, surplus_kwh: 4, production_kwh: 5 },
+    ];
+    setEnergyUsage(dummyData);
+    setLoading(false);
+    calculateTokens(dummyData);
   };
 
   const fetchRecommendations = async () => {
     setLoading(true);
-    try {
-      const data = await backendActor.get_recommendations(); // Fetch recommendations from backend
-      setRecommendations(data);
-    } catch (error) {
-      console.error("Error fetching recommendations:", error);
-    } finally {
-      setLoading(false);
-    }
+    const dummyRecommendations = [
+      { recommendation: 'Reduce usage during peak hours', potential_savings: 3 },
+      { recommendation: 'Use energy-efficient appliances', potential_savings: 5 },
+      { recommendation: 'Optimize HVAC settings', potential_savings: 2 },
+    ];
+    setRecommendations(dummyRecommendations);
+    setLoading(false);
   };
 
-  // Format chart data for visualization
-  const formatChartData = () => {
+  const formatBarChartData = () => {
     const timestamps = energyUsage.map((usage) =>
-      new Date(usage.timestamp / 1e6).toLocaleDateString()
+      new Date(usage.timestamp).toLocaleDateString()
     );
     const consumption = energyUsage.map((usage) => usage.consumption_kwh);
+    const production = energyUsage.map((usage) => usage.production_kwh);
+    const surplus = energyUsage.map((usage) => usage.surplus_kwh);
 
     return {
       labels: timestamps,
@@ -441,51 +664,121 @@ function Dashboard() {
         {
           label: "Energy Consumption (kWh)",
           data: consumption,
-          borderColor: "rgba(75, 192, 192, 1)",
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-          borderWidth: 2,
+          backgroundColor: "rgba(75, 192, 192, 0.7)",
+        },
+        {
+          label: "Energy Production (kWh)",
+          data: production,
+          backgroundColor: "rgba(255, 165, 0, 0.7)",
+        },
+        {
+          label: "Energy Sales (kWh)",
+          data: surplus,
+          backgroundColor: "rgba(138, 43, 226, 0.7)",
         },
       ],
     };
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    localStorage.setItem("darkMode", JSON.stringify(!darkMode));
+  };
+
+  const calculateTokens = (energyData) => {
+    let tokens = 0;
+    energyData.forEach((usage) => {
+      if (usage.consumption_kwh <= 7) { 
+        tokens += 2; 
+      }
+      tokens += usage.surplus_kwh; 
+    });
+    setTokens(tokens);
+  };
+
+  const { total, average } = calculateSummary();
+
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1>VoltEdge Dashboard</h1>
+    <div className={`dashboard-container ${darkMode ? "dark-mode" : ""}`}>
+      <div className="dashboard-header">
+        <h1>Energy Dashboard</h1>
+        <button onClick={toggleDarkMode} className="btn-dark-mode">
+          Toggle Dark Mode
+        </button>
+      </div>
+
       {loading && <p>Loading...</p>}
 
       {/* Energy Usage Overview Section */}
-      <div style={{ marginBottom: "20px" }}>
+      <div className="energy-usage-section">
         <h2>Energy Usage Overview</h2>
-        {energyUsage.length > 0 ? (
-          <Line
-            data={formatChartData()}
-            options={{
-              responsive: true,
-              plugins: {
-                legend: { display: true },
-              },
-            }}
-          />
-        ) : (
-          <p>No energy usage data available.</p>
-        )}
-      </div>
+        <div className="energy-summary">
+          <div className="card-column">
+            <div className="summary-card">
+              <h3>Total Consumption</h3>
+              <p>{total} kWh</p>
+            </div>
+            <div className="summary-card">
+              <h3>Average Daily Consumption</h3>
+              <p>{average.toFixed(2)} kWh</p>
+            </div>
+          </div>
 
-      {/* Energy Efficiency Insights Section */}
-      <div style={{ marginBottom: "20px" }}>
-        <h2>Energy Efficiency Insights</h2>
-        {recommendations.length > 0 ? (
-          <ul>
-            {recommendations.map((rec, index) => (
-              <li key={index}>
-                {rec.recommendation} - Potential Savings: {rec.potential_savings} kWh
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No recommendations available.</p>
-        )}
+          <div className="card-column">
+            <div className="summary-card">
+              <h3>Tokens Earned</h3>
+              <p>{tokens} Tokens</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="overview-container">
+          {/* Stacked Bar Chart */}
+          <div className="chart-container">
+            {energyUsage.length > 0 ? (
+              <Bar
+                data={formatBarChartData()}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: { display: true },
+                  },
+                  scales: {
+                    x: { stacked: true },
+                    y: { stacked: true },
+                  },
+                }}
+              />
+            ) : (
+              <p>No energy data available.</p>
+            )}
+          </div>
+
+          {/* Energy Consumption, Production, and Sales Explanation */}
+          <div className="description-container">
+            <h3>How to Read the Chart:</h3>
+            <p><strong>Energy Consumption (kWh)</strong>: This represents the total energy consumed by your home or business from the grid. It is depicted by the light blue bars. A higher consumption indicates more energy usage.</p>
+            <p><strong>Energy Production (kWh)</strong>: This shows the amount of energy you have generated, typically from solar panels or other renewable sources. The orange bars represent the total energy produced. The more you generate, the less you need to consume from the grid.</p>
+            <p><strong>Energy Sales (kWh)</strong>: This is the surplus energy that you have sold back to the grid or to other users. The purple bars represent this excess energy, which can earn you tokens or provide savings. It is a positive way to contribute to the grid while reducing your own energy costs.</p>
+            <p><strong>Goal:</strong> The aim is to reduce energy consumption from the grid, increase energy production through renewable sources, and maximize energy sales to contribute back to the community or earn benefits.</p>
+          </div>
+        </div>
+
+        {/* Energy Efficiency Insights */}
+        <div className="recommendations-container">
+          <h2>Energy Efficiency Insights</h2>
+          {recommendations.length > 0 ? (
+            <ul className="recommendations-list">
+              {recommendations.map((rec, index) => (
+                <li key={index} className="recommendation-card">
+                  {rec.recommendation} - Potential Savings: {rec.potential_savings} kWh
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No recommendations available.</p>
+          )}
+        </div>
       </div>
     </div>
   );

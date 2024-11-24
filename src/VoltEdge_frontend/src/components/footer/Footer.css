@@ -1,6 +1,6 @@
 /* Footer Styles */
 .footer {
-    background: #30475e; /* Dark blue background color */
+    background: #6C63FF; /* Dark blue background color */
     color: #ffffff; /* White text color */
     padding: 20px;
     text-align: center;
@@ -15,5 +15,9 @@
     color: #ffffff; /* White text color */
     font-size: 14px;
     margin-top: 10px; /* Adjust the margin for spacing */
+  }
+
+  .footer p{
+    color: #f4f4f9;
   }
   

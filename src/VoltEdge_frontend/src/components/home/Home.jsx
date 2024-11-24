@@ -41,18 +41,19 @@
 import React, { useState, useEffect } from "react";
 import { FaSun, FaMoon, FaChevronDown, FaChevronUp, FaBars, FaTimes } from "react-icons/fa"; 
 import { Link, useNavigate } from "react-router-dom";
-import { IoSunnyOutline } from "react-icons/io5";
-import Footer from '../footer/Footer';  // Import the Footer component
+import Footer from '../footer/Footer';  
 import './Home.css';
-
+import image1 from '../../assets/energymanagement.jpg';
+import image2 from '../../assets/energystorage.jpg';
+import image3 from '../../assets/energystorage2.jpg';
 export default function HomePage() {
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem("darkMode");
     return savedMode ? JSON.parse(savedMode) : false;
   });
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage mobile menu toggle
-  const navigate = useNavigate(); // Initialize navigate
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
@@ -68,22 +69,7 @@ export default function HomePage() {
   };
 
   const handleLoginClick = () => {
-    navigate("/auth"); // Redirect to the authentication page
-  };
-
-  const [faqOpen, setFaqOpen] = useState([false, false, false, false]);
-
-  const toggleFaq = (index) => {
-    const newFaqOpen = faqOpen.map((item, i) => (i === index ? !item : false));
-    setFaqOpen(newFaqOpen);
-  };
-
-  // Scroll to a section smoothly
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+    navigate("/auth"); 
   };
 
   return (
@@ -92,92 +78,122 @@ export default function HomePage() {
         <section id="hero" className="hero">
           <div className="card">
             <div className="hero-content">
-              <h3>Empowering Your Energy Choices</h3>
+              <h3>Empower Your Future with Renewable Energy</h3>
               <p>
-                Our platform empowers individuals and businesses to take control of their energy usage with real-time tracking, peer-to-peer energy trading, and personalized savings recommendations. Optimize your energy consumption, buy and sell excess energy, and receive tailored insights to reduce costs and improve sustainability. With features like energy audits, transaction history tracking, and token management, we make it easy to monitor your progress and contribute to a greener future.
+                Join the renewable energy revolution! Our platform helps you monitor your energy consumption, 
+                earn tokens, and trade surplus energy with peers. Access solar, wind, hydropower, and geothermal 
+                solutions, track your energy usage, and get personalized savings recommendations. 
+                Together, let's create a greener, more sustainable world.
               </p>
               <div className="hero-actions">
-                <Link to={"/coursePage"} className="btn-secondary">See Courses</Link>
-                <a href="https://github.com/UNKORRUPT/UNKORRUPT" className="btn-link">
-                  View on Github
-                </a>
+                <Link to={"/coursePage"} className="btn-secondary">Explore Renewable Solutions</Link>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Hero Image Section */}
+        <section id="hero-image" className="hero-image-section">
+          <div className="overlay">
+            <h2>Leading the Way to a Sustainable Future</h2>
+            <p>Harness the power of renewable energy with cutting-edge technology and smart solutions.</p>
+          </div>
+        </section>
+
         <section id="benefits" className="section-title">
           <div className="benefits1">
-            <h2>About Our Energy Platform</h2>
-            <h3>Our Energy Platform: Empowering You</h3>
-            <p>
-              Our energy platform empowers users to take control of their energy consumption, savings, and trading in a seamless, intuitive way. Key features include:
-            </p>
+            <h4>Our platform empowers individuals and businesses to make sustainable energy choices.</h4>
           </div>
 
           <div className="benefits">
             <div className="benefit-card">
-              <h4>Energy Consumption & Savings Tracking</h4>
+              <h4>Comprehensive Renewable Energy Solutions</h4>
               <p>
-                View real-time data on your energy usage and track savings, helping you make informed decisions to optimize efficiency.
+                Access a wide range of renewable energy systems such as solar, wind, hydropower, and geothermal 
+                solutions tailored for your home or business.
               </p>
             </div>
 
             <div className="benefit-card">
               <h4>P2P Energy Trading</h4>
               <p>
-                Participate in a dynamic marketplace where you can sell excess energy or purchase energy directly from other users, creating a decentralized energy ecosystem.
+                Sell your excess energy to peers or purchase renewable energy directly from others in our secure, decentralized marketplace.
               </p>
             </div>
 
             <div className="benefit-card">
-              <h4>Energy Audit & Recommendations</h4>
+              <h4>Token Management</h4>
               <p>
-                Get personalized insights into your energy habits, including automated recommendations to reduce consumption and lower costs.
+                Earn tokens through energy generation, trading, and saving. Manage your balance and track your progress in real-time.
               </p>
             </div>
 
             <div className="benefit-card">
-              <h4>Input Energy Data</h4>
+              <h4>Energy Consumption & Savings Tracking</h4>
               <p>
-                Easily input or automatically track your energy usage, making it simple to monitor your consumption over time.
+                Monitor your energy usage with smart devices and receive personalized recommendations to reduce costs and optimize efficiency.
               </p>
             </div>
 
             <div className="benefit-card">
-              <h4>Automated Savings Recommendations</h4>
+              <h4>Automated Energy Audits</h4>
               <p>
-                Based on your energy data, receive tailored suggestions to help you save more energy and money.
+                Get personalized audits and automated recommendations to improve your energy efficiency and save on utility costs.
               </p>
             </div>
 
             <div className="benefit-card">
-              <h4>Transaction History & Token Management</h4>
+              <h4>Surplus Energy Tracking</h4>
               <p>
-                Keep track of your energy transactions and manage your energy tokens. Whether you’re buying, selling, or earning tokens from rewards, you can easily view your balance and transaction history.
+                Track surplus energy generation from any renewable source and easily trade it with peers through our platform.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="cta" className="cta">
-          <h2>Ready for your first course?</h2>
-          <p>Get started on your patriot journey.</p>
-          <Link to={"/coursePage"} className="btn-primary">See Courses</Link>
+        {/* New Section: Alternating Images and Text */}
+        <section id="image-text-section" className="image-text-section">
+          <div className="image-text-item">
+            <img src={image1} alt="Image 1" className="image" />
+            <div className="text">
+            <p>Manage your energy seamlessly.</p>
+            <p>Manage your energy seamlessly.</p>
+            <p>Manage your energy seamlessly.</p>
+            <p>Manage your energy seamlessly.</p>
+            </div>
+          </div>
+
+          <div className="image-text-item reverse">
+            <img src={image2} alt="Image 2" className="image" />
+            <div className="text">
+            <p>Manage your energy seamlessly.</p>
+            <p>Manage your energy seamlessly.</p>
+            <p>Manage your energy seamlessly.</p>
+            <p>Manage your energy seamlessly.</p>
+            </div>
+          </div>
+
+          <div className="image-text-item">
+            <img src={image3} alt="Image 3" className="image" />
+            <div className="text">
+            <p>Manage your energy seamlessly.</p>
+            <p>Manage your energy seamlessly.</p>
+            <p>Manage your energy seamlessly.</p>
+            <p>Manage your energy seamlessly.</p>
+            </div>
+          </div>
         </section>
+
+        <section id="cta" className="cta">
+          <h2>Ready to Transition to Clean Energy?</h2>
+          <p>Take the first step towards a sustainable future with solar, wind, hydro, and geothermal energy.</p>
+          <Link to={"/coursePage"} className="btn-primary">Explore Renewable Solutions</Link>
+        </section>
+
+        
 
         <Footer /> {/* Render the Footer component */}
       </div>
     </div>
   );
-}
-
-function getFaqAnswer(index) {
-  const answers = [
-    "Yes, PatriotAi is completely free to use.",
-    "No, all you need is Internet Identity!",
-    "Our data is open to policy makers, educators and patriots. Commercialization plans are not established yet.",
-    "Yes, we offer technical support.",
-  ];
-  return answers[index];
 }

@@ -1,3 +1,15 @@
 service : {
-    "greet": (text) -> (text) query;
+    add_energy_usage: (float64) -> ();
+    save_recommendations: (vec record {
+        recommendation: text;
+        potential_savings: float64;
+    }) -> ();
+    analyze_user_energy: () -> (vec record {
+        recommendation: text;
+        potential_savings: float64;
+    }) query;
+    get_recommendations: () -> (vec record {
+        recommendation: text;
+        potential_savings: float64;
+    }) query;
 }

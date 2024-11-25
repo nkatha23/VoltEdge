@@ -10,6 +10,7 @@ dependencies = [
  "ic-cdk",
  "ic-cdk-macros",
  "ic-cdk-timers",
+ "ic-types",
  "serde",
  "serde_derive",
 ]
@@ -315,6 +316,12 @@ dependencies = [
  "serde_bytes",
  "slotmap",
 ]
+
+[[package]]
+name = "ic-types"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "95af86c6e40ea8a850c64914024762a0b91a2a6d438b412d8f4a7fc010e72519"
 
 [[package]]
 name = "ic0"

@@ -589,6 +589,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2'; // Import Bar chart from chartjs
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import './Dashboard.css';
+import {VoltEdge_backend} from "../../../../declarations/VoltEdge_backend"
 
 // Register necessary components for Chart.js
 ChartJS.register(
@@ -607,6 +608,12 @@ function Dashboard() {
   const [darkMode, setDarkMode] = useState(false); 
   const [tokens, setTokens] = useState(0);
 
+  // Add energy usage
+  const addEnergysage = async () => {
+    const addVolt = await VoltEdge_backend.add_energy_usage(2.43);
+    addVolt 
+  }
+  addEnergysage();
   // Calculate summary stats for energy usage
   const calculateSummary = () => {
     if (energyUsage.length === 0) return { total: 0, average: 0 };

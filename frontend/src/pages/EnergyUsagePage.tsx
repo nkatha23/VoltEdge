@@ -1,36 +1,12 @@
 import React, { useState, useEffect } from 'react';
-// Import the necessary components from Chart.js
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement, // Needed for Pie chart arcs
-  BarElement,  // Needed for Bar chart
-  RadialLinearScale // Needed for Radar charts
-} from 'chart.js';
 import { Line, Pie, Bar, Radar } from 'react-chartjs-2';
+import ChartJS from 'chart.js/auto';
 import EnergyForm from '../components/EnergyForm';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Register all the required Chart.js components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement, // Register the arc element for Pie charts
-  BarElement,  // Register the Bar element for Bar charts
-  RadialLinearScale // Register the radial linear scale for Radar charts
-);
+// Registering ChartJS components
+ChartJS.register();
 
 const EnergyUsagePage: React.FC = () => {
   const [energyData, setEnergyData] = useState<number[]>([]);
@@ -155,55 +131,24 @@ const EnergyUsagePage: React.FC = () => {
             <button onClick={() => handleTimeRangeChange('yearly')} className={`px-4 py-2 rounded ${timeRange === 'yearly' ? 'bg-[#0077b6] text-white' : 'bg-gray-200'}`}>Yearly</button>
           </div>
 
-          {/* Line Chart for Energy Usage */}
-          <div className="bg-white shadow-lg rounded-lg p-6 mb-10">
-            <Line data={data} options={options} />
-          </div>
+          {/* Dashboard-like Layout for Charts */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Line Chart for Energy Usage */}
+            <div className="bg-white shadow-lg rounded-lg p-6">
+              <Line data={data} options={options} />
+            </div>
 
-          {/* Energy Usage Breakdown Pie Chart */}
-          <div className="mt-12">
-            <h2 className="text-2xl font-semibold text-[#0077b6] mb-4">Energy Usage Breakdown</h2>
+            {/* Energy Usage Breakdown Pie Chart */}
             <div className="bg-white shadow-lg rounded-lg p-6">
               <Pie data={pieData} />
             </div>
-          </div>
 
-          {/* Monthly Energy Usage Bar Chart */}
-          <div className="mt-12">
-            <h2 className="text-2xl font-semibold text-[#0077b6] mb-4">Monthly Energy Usage</h2>
+            {/* Monthly Energy Usage Bar Chart */}
             <div className="bg-white shadow-lg rounded-lg p-6">
               <Bar data={barData} />
             </div>
-          </div>
 
-          {/* Energy Breakdown Section */}
-          <div className="grid gap-8 md:grid-cols-3 mt-12">
-            <div className="bg-white shadow-lg rounded-lg p-6">
-              <h2 className="text-2xl font-semibold text-[#0077b6] mb-4">Lighting</h2>
-              <p className="text-gray-600">15 kWh used this week.</p>
-              <div className="w-full bg-gray-200 rounded-full h-2.5 mt-4">
-                <div className="bg-[#00b4d8] h-2.5 rounded-full" style={{ width: '30%' }}></div>
-              </div>
-            </div>
-            <div className="bg-white shadow-lg rounded-lg p-6">
-              <h2 className="text-2xl font-semibold text-[#0077b6] mb-4">Heating</h2>
-              <p className="text-gray-600">30 kWh used this week.</p>
-              <div className="w-full bg-gray-200 rounded-full h-2.5 mt-4">
-                <div className="bg-[#00b4d8] h-2.5 rounded-full" style={{ width: '60%' }}></div>
-              </div>
-            </div>
-            <div className="bg-white shadow-lg rounded-lg p-6">
-              <h2 className="text-2xl font-semibold text-[#0077b6] mb-4">Appliances</h2>
-              <p className="text-gray-600">20 kWh used this week.</p>
-              <div className="w-full bg-gray-200 rounded-full h-2.5 mt-4">
-                <div className="bg-[#00b4d8] h-2.5 rounded-full" style={{ width: '40%' }}></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Monthly Comparison Radar Chart */}
-          <div className="mt-12">
-            <h2 className="text-2xl font-semibold text-[#0077b6] mb-4">Monthly Usage Comparison</h2>
+            {/* Monthly Comparison Radar Chart */}
             <div className="bg-white shadow-lg rounded-lg p-6">
               <Radar data={radarData} />
             </div>
@@ -213,28 +158,12 @@ const EnergyUsagePage: React.FC = () => {
           <div className="mt-12">
             <h2 className="text-2xl font-semibold text-[#0077b6] mb-4">Enter Your Energy Data</h2>
             <p className="text-gray-600 mb-4">Manually add energy usage data to keep your records up-to-date.</p>
-            <EnergyForm onSubmit={handleFormSubmit} />
+            <EnergyForm />
           </div>
 
-          {/* Insights & Recommendations */}
-          <div className="mt-12">
-            <h2 className="text-2xl font-semibold text-[#0077b6] mb-4">Insights & Recommendations</h2>
-            <ul className="list-disc list-inside text-gray-700">
-              {energyData.some(usage => usage > 70) && (
-                <li className="mb-2">
-                  You have high energy usage on certain days. Consider using energy-efficient appliances.
-                </li>
-              )}
-              {energyData.some(usage => usage < 50) && (
-                <li className="mb-2">
-                  Great job keeping your energy usage low! Maintaining this could save you money in the long term.
-                </li>
-              )}
-            </ul>
-          </div>
+          <ToastContainer />
         </>
       )}
-      <ToastContainer />
     </div>
   );
 };

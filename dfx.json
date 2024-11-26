@@ -1,19 +1,19 @@
 {
   "canisters": {
     "VoltEdge_backend": {
-      "candid": "src/VoltEdge_backend/VoltEdge_backend.did",
-      "package": "VoltEdge_backend",
+      "candid": "backend/backend.did",
+      "package": "backend",
       "type": "rust"
     },
     "VoltEdge_frontend": {
       "dependencies": [
-        "VoltEdge_backend"
+        "backend"
       ],
       "source": [
-        "src/VoltEdge_frontend/dist"
+        "frontend/dist"
       ],
       "type": "assets",
-      "workspace": "VoltEdge_frontend"
+      "workspace": "frontend"
     }
   },
   "defaults": {
